@@ -7,6 +7,10 @@ An interactive, horror-themed fan website dedicated to Netflix's Stranger Things
 ![Vite](https://img.shields.io/badge/Vite-7.3-646CFF?style=for-the-badge&logo=vite)
 ![Framer Motion](https://img.shields.io/badge/Framer%20Motion-Animations-FF0055?style=for-the-badge)
 
+## 🌍 Live Demo
+
+**👉 [Visit the Stranger Things Experience](https://aryannten.github.io/StrangerThings/)**
+
 ---
 
 ## 🌐 Live Features
