@@ -9,7 +9,7 @@ An interactive, horror-themed fan website dedicated to Netflix's Stranger Things
 
 ## 🌍 Live Demo
 
-**👉 [Visit the Stranger Things Experience](https://aryannten.github.io/StrangerThings/)**
+**👉 [Visit the Stranger Things Experience](https://aryannten.github.io/StangerThings/)**
 
 ---
 
