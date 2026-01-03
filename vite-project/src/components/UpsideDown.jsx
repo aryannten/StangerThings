@@ -9,7 +9,7 @@ const villains = [
     description: 'A terrifying creature from the Upside Down. It hunts by sensing blood and sound. Its face opens like a deadly flower, revealing rows of razor-sharp teeth.',
     abilities: ['Blood Sensing', 'Dimension Travel', 'Superhuman Strength'],
     threat: 'EXTREME',
-    image: '/images/demogorgon.jpg'
+    image: `${import.meta.env.BASE_URL}images/demogorgon.jpg`
   },
   {
     name: 'THE MIND FLAYER',
@@ -17,7 +17,7 @@ const villains = [
     description: 'An ancient entity of immense power. It commands the hive mind of the Upside Down, possessing and controlling its victims like puppets.',
     abilities: ['Hive Mind Control', 'Possession', 'Reality Manipulation'],
     threat: 'CATASTROPHIC',
-    image: '/images/mindflayer.jpg'
+    image: `${import.meta.env.BASE_URL}images/mindflayer.jpg`
   },
   {
     name: 'VECNA',
@@ -25,7 +25,7 @@ const villains = [
     description: 'Once known as Henry Creel, now transformed into the ultimate evil. He kills by trapping victims in their darkest memories and breaking their minds.',
     abilities: ['Psychic Torture', 'Telekinesis', 'Mind Invasion'],
     threat: 'APOCALYPTIC',
-    image: '/images/vecna.jpg'
+    image: `${import.meta.env.BASE_URL}images/vecna.jpg`
   }
 ]
 
