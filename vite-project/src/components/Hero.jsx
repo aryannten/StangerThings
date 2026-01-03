@@ -1,9 +1,8 @@
 import React, { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import './Hero.css'
-import Navbar from './Navbar'
 
-const Hero = () => {
+const Hero = ({ onEnterUpsideDown }) => {
   const heroRef = useRef(null)
   const revealRef = useRef(null)
 
@@ -66,17 +65,8 @@ const Hero = () => {
     visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 70, damping: 12 } },
   }
 
-  const navbarVariant = {
-    hidden: { y: -100, opacity: 0 },
-    visible: { y: 0, opacity: 1, transition: { type: 'spring', stiffness: 80, damping: 14 } },
-  }
-
   return (
     <div className="hero" ref={heroRef}>
-      <motion.div variants={navbarVariant} initial="hidden" animate="visible">
-        <Navbar />
-      </motion.div>
-
       <motion.div className="hero-content" variants={container} initial="hidden" animate="visible">
         <motion.div className="left" variants={item}>
           <h1 className="st-title">
@@ -87,7 +77,13 @@ const Hero = () => {
             a hidden world awakens beneath Hawkins.
             Some doors, once opened, can never be closed.
           </motion.p>
-          <motion.button className="st-btn" variants={item}>
+          <motion.button 
+            className="st-btn" 
+            variants={item}
+            onClick={onEnterUpsideDown}
+            whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(255, 50, 50, 0.6)" }}
+            whileTap={{ scale: 0.95 }}
+          >
             Enter the Upside Down
           </motion.button>
         </motion.div>

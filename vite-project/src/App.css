@@ -2,3 +2,569 @@
   padding: 0;
   margin: 0;
 }
+
+/* ========== HORROR PORTAL TRANSITION ========== */
+.portal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  background: #000;
+  overflow: hidden;
+}
+
+/* Phase backgrounds */
+.portal-overlay.phase-1 {
+  animation: flicker-bg 0.15s infinite;
+}
+
+.portal-overlay.phase-2 {
+  background: radial-gradient(circle at center, #1a0a0a 0%, #000 70%);
+}
+
+.portal-overlay.phase-3 {
+  background: radial-gradient(circle at center, #2a1020 0%, #0a0510 50%, #000 100%);
+}
+
+.portal-overlay.phase-4 {
+  background: #050510;
+}
+
+@keyframes flicker-bg {
+  0% { background: #000; }
+  10% { background: #111; }
+  20% { background: #000; }
+  30% { background: #0a0a0a; }
+  40% { background: #000; }
+  50% { background: #151515; }
+  60% { background: #000; }
+  70% { background: #0a0505; }
+  80% { background: #000; }
+  90% { background: #111; }
+  100% { background: #000; }
+}
+
+/* Flickering light layer */
+.flicker-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.phase-1 .flicker-layer {
+  animation: intense-flicker 0.1s infinite;
+}
+
+@keyframes intense-flicker {
+  0%, 100% { background: transparent; }
+  5% { background: rgba(255, 200, 150, 0.1); }
+  10% { background: transparent; }
+  15% { background: rgba(255, 100, 50, 0.15); }
+  25% { background: transparent; }
+  30% { background: rgba(255, 150, 100, 0.08); }
+  50% { background: transparent; }
+  55% { background: rgba(255, 50, 50, 0.2); }
+  60% { background: transparent; }
+  80% { background: rgba(200, 100, 50, 0.1); }
+}
+
+/* Portal container */
+.portal-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 450px;
+  height: 550px;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.phase-2 .portal-container,
+.phase-3 .portal-container {
+  opacity: 1;
+}
+
+.phase-3 .portal-container {
+  animation: portal-breathe 1.5s ease-in-out infinite;
+}
+
+@keyframes portal-breathe {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.05); }
+}
+
+/* ========== REALISTIC FLESH PORTAL ========== */
+
+/* Membrane layers - organic tissue look */
+.portal-membrane {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+}
+
+.membrane-layer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 45% 55% 50% 50% / 55% 45% 55% 45%;
+  animation: membrane-morph 4s ease-in-out infinite;
+}
+
+.membrane-layer.layer-1 {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at center,
+    transparent 30%,
+    rgba(80, 20, 30, 0.3) 50%,
+    rgba(60, 15, 25, 0.5) 70%,
+    rgba(40, 10, 20, 0.7) 100%
+  );
+  filter: blur(20px);
+  animation-delay: 0s;
+}
+
+.membrane-layer.layer-2 {
+  width: 85%;
+  height: 85%;
+  background: radial-gradient(ellipse at center,
+    transparent 25%,
+    rgba(120, 40, 50, 0.4) 45%,
+    rgba(90, 30, 40, 0.6) 65%,
+    rgba(60, 20, 30, 0.8) 100%
+  );
+  filter: blur(15px);
+  animation-delay: -1s;
+  animation-duration: 3.5s;
+}
+
+.membrane-layer.layer-3 {
+  width: 70%;
+  height: 70%;
+  background: radial-gradient(ellipse at center,
+    transparent 20%,
+    rgba(150, 50, 60, 0.5) 40%,
+    rgba(120, 40, 50, 0.7) 60%,
+    rgba(80, 25, 35, 0.9) 100%
+  );
+  filter: blur(10px);
+  animation-delay: -2s;
+  animation-duration: 3s;
+}
+
+.membrane-layer.layer-4 {
+  width: 55%;
+  height: 55%;
+  background: radial-gradient(ellipse at center,
+    rgba(180, 60, 70, 0.3) 0%,
+    rgba(150, 50, 60, 0.6) 40%,
+    rgba(100, 35, 45, 0.8) 70%,
+    rgba(60, 20, 30, 1) 100%
+  );
+  filter: blur(5px);
+  animation-delay: -0.5s;
+  animation-duration: 2.5s;
+}
+
+@keyframes membrane-morph {
+  0%, 100% { 
+    border-radius: 45% 55% 50% 50% / 55% 45% 55% 45%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  25% {
+    border-radius: 55% 45% 55% 45% / 45% 55% 45% 55%;
+  }
+  50% { 
+    border-radius: 50% 50% 45% 55% / 50% 50% 55% 45%;
+    transform: translate(-50%, -50%) rotate(2deg);
+  }
+  75% {
+    border-radius: 45% 55% 55% 45% / 55% 45% 45% 55%;
+  }
+}
+
+/* The tear/rip in reality */
+.portal-tear {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 320px;
+}
+
+.tear-edge {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to bottom,
+    rgba(180, 80, 90, 0.9) 0%,
+    rgba(200, 90, 100, 1) 20%,
+    rgba(220, 100, 110, 1) 50%,
+    rgba(200, 90, 100, 1) 80%,
+    rgba(180, 80, 90, 0.9) 100%
+  );
+}
+
+.tear-edge.left {
+  left: 0;
+  border-radius: 100% 0 0 100% / 50% 0 0 50%;
+  box-shadow: 
+    inset 10px 0 20px rgba(100, 30, 40, 0.8),
+    -5px 0 30px rgba(200, 80, 90, 0.6);
+  animation: tear-pulse-left 2s ease-in-out infinite;
+}
+
+.tear-edge.right {
+  right: 0;
+  border-radius: 0 100% 100% 0 / 0 50% 50% 0;
+  box-shadow: 
+    inset -10px 0 20px rgba(100, 30, 40, 0.8),
+    5px 0 30px rgba(200, 80, 90, 0.6);
+  animation: tear-pulse-right 2s ease-in-out infinite;
+}
+
+@keyframes tear-pulse-left {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-8px); }
+}
+
+@keyframes tear-pulse-right {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(8px); }
+}
+
+.tear-glow {
+  position: absolute;
+  top: -20%;
+  left: -50%;
+  width: 200%;
+  height: 140%;
+  background: radial-gradient(ellipse at center,
+    rgba(255, 100, 120, 0.4) 0%,
+    rgba(200, 60, 80, 0.2) 30%,
+    transparent 60%
+  );
+  animation: glow-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+.tear-void {
+  position: absolute;
+  top: 5%;
+  left: 25%;
+  width: 50%;
+  height: 90%;
+  background: linear-gradient(to bottom,
+    #0a0510 0%,
+    #050208 50%,
+    #0a0510 100%
+  );
+  border-radius: 50% / 10%;
+  box-shadow: 
+    inset 0 0 50px rgba(0, 0, 0, 1),
+    0 0 30px rgba(50, 20, 40, 0.8);
+}
+
+/* Organic tendrils coming from portal */
+.organic-tendrils {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.organic-tendril {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--length, 150px);
+  height: 12px;
+  background: linear-gradient(90deg,
+    rgba(150, 60, 70, 0.9) 0%,
+    rgba(120, 50, 60, 0.7) 30%,
+    rgba(80, 35, 45, 0.4) 60%,
+    transparent 100%
+  );
+  transform-origin: left center;
+  transform: rotate(var(--rotation, 0deg));
+  border-radius: 6px 50% 50% 6px;
+  animation: tendril-writhe 3s ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+  box-shadow: 0 0 15px rgba(150, 50, 70, 0.4);
+}
+
+.organic-tendril::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 0;
+  width: 80%;
+  height: 4px;
+  background: linear-gradient(90deg,
+    rgba(200, 100, 110, 0.6) 0%,
+    transparent 100%
+  );
+  border-radius: 2px;
+}
+
+.phase-3 .organic-tendril {
+  animation: tendril-reach-out 1s ease-in-out infinite;
+}
+
+@keyframes tendril-writhe {
+  0%, 100% { 
+    transform: rotate(var(--rotation, 0deg)) scaleX(1);
+    opacity: 0.7;
+  }
+  50% { 
+    transform: rotate(calc(var(--rotation, 0deg) + 5deg)) scaleX(1.2);
+    opacity: 1;
+  }
+}
+
+@keyframes tendril-reach-out {
+  0%, 100% { 
+    transform: rotate(var(--rotation, 0deg)) scaleX(1.3);
+  }
+  50% { 
+    transform: rotate(calc(var(--rotation, 0deg) + 8deg)) scaleX(1.8);
+  }
+}
+
+/* Dripping organic matter */
+.dripping-matter {
+  position: absolute;
+  top: 60%;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  pointer-events: none;
+}
+
+.drip {
+  position: absolute;
+  width: 8px;
+  height: 0;
+  background: linear-gradient(to bottom,
+    rgba(150, 50, 60, 0.9) 0%,
+    rgba(120, 40, 50, 0.7) 50%,
+    rgba(80, 30, 40, 0.4) 100%
+  );
+  border-radius: 4px 4px 50% 50%;
+  animation: drip-fall 2.5s ease-in infinite;
+  box-shadow: 0 5px 15px rgba(150, 50, 60, 0.5);
+}
+
+.drip::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  background: radial-gradient(circle, rgba(150, 50, 60, 0.8), rgba(100, 30, 40, 0.5));
+  border-radius: 50%;
+  opacity: 0;
+  animation: drip-drop 2.5s ease-in infinite;
+}
+
+@keyframes drip-fall {
+  0% { height: 0; opacity: 0; }
+  10% { opacity: 1; }
+  50% { height: 80px; }
+  100% { height: 120px; opacity: 0; transform: translateY(50px); }
+}
+
+@keyframes drip-drop {
+  0%, 60% { opacity: 0; transform: translateX(-50%) scale(0); }
+  70% { opacity: 1; transform: translateX(-50%) scale(1); }
+  100% { opacity: 0; transform: translateX(-50%) scale(1.5); }
+}
+
+/* Organic veins spreading across screen */
+.veins-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.phase-2 .veins-container { opacity: 0.3; }
+.phase-3 .veins-container { opacity: 0.7; }
+.phase-4 .veins-container { opacity: 1; }
+
+.vein {
+  position: absolute;
+  width: 200px;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(100, 40, 60, 0.8) 20%,
+    rgba(150, 60, 80, 0.9) 50%,
+    rgba(100, 40, 60, 0.8) 80%,
+    transparent 100%
+  );
+  border-radius: 2px;
+  animation: vein-grow 3s ease-out forwards;
+  box-shadow: 0 0 10px rgba(150, 50, 80, 0.5);
+}
+
+@keyframes vein-grow {
+  from { 
+    width: 0;
+    opacity: 0;
+  }
+  to { 
+    width: 300px;
+    opacity: 1;
+  }
+}
+
+/* Floating spores */
+.spores {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.phase-2 .spores { opacity: 0.5; }
+.phase-3 .spores { opacity: 0.8; }
+.phase-4 .spores { opacity: 1; }
+
+.spore {
+  position: absolute;
+  bottom: -20px;
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle, rgba(180, 150, 200, 0.9), rgba(100, 80, 120, 0.5));
+  border-radius: 50%;
+  animation: spore-float linear infinite;
+  box-shadow: 0 0 15px rgba(150, 100, 180, 0.6);
+}
+
+@keyframes spore-float {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0;
+  }
+  10% { opacity: 1; }
+  90% { opacity: 0.8; }
+  100% {
+    transform: translateY(-110vh) translateX(50px) scale(0.5);
+    opacity: 0;
+  }
+}
+
+/* Distortion layer */
+.distortion-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.1) 2px,
+      rgba(0, 0, 0, 0.1) 4px
+    );
+  animation: scan-lines 0.1s linear infinite;
+}
+
+.phase-3 .distortion-layer,
+.phase-4 .distortion-layer {
+  opacity: 1;
+}
+
+@keyframes scan-lines {
+  from { transform: translateY(0); }
+  to { transform: translateY(4px); }
+}
+
+/* Portal text */
+.portal-text {
+  position: absolute;
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.glitch-text {
+  font-family: 'Bebas Neue', monospace;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  color: rgba(200, 150, 180, 0.9);
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  text-shadow: 
+    0 0 10px rgba(200, 100, 150, 0.8),
+    0 0 20px rgba(200, 100, 150, 0.6),
+    0 0 40px rgba(200, 100, 150, 0.4);
+  animation: glitch 0.3s infinite;
+}
+
+@keyframes glitch {
+  0% { 
+    transform: translate(0);
+    opacity: 1;
+  }
+  20% { 
+    transform: translate(-3px, 2px);
+    opacity: 0.8;
+  }
+  40% { 
+    transform: translate(3px, -2px);
+    opacity: 1;
+  }
+  60% { 
+    transform: translate(-2px, -1px);
+    opacity: 0.9;
+  }
+  80% { 
+    transform: translate(2px, 1px);
+    opacity: 0.85;
+  }
+  100% { 
+    transform: translate(0);
+    opacity: 1;
+  }
+}
+
+.phase-4 .glitch-text {
+  color: rgba(150, 180, 255, 0.9);
+  text-shadow: 
+    0 0 10px rgba(100, 130, 255, 0.8),
+    0 0 20px rgba(100, 130, 255, 0.6),
+    0 0 40px rgba(100, 130, 255, 0.4);
+}
